@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marathon Dashboard - Defy Limits</title>
+  <meta name="description" content="Futuristic glassmorphic dashboard for marathon runners.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <video autoplay muted loop id="bg-video">
+    <source src="assets/video/background.mp4" type="video/mp4">
+  </video>
+
+  <div class="dashboard">
+
+    <!-- Sidebar (Left) -->
+    <aside class="sidebar white-glass">
+      <div class="brand">
+        <a href="assets/about.html" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 10px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="url(#brand-grad)" />
+            <path d="M2 17L12 22L22 17" stroke="url(#brand-grad)" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M2 12L12 17L22 12" stroke="url(#brand-grad)" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <defs>
+              <linearGradient id="brand-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#00f3ff" />
+                <stop offset="1" stop-color="#a855f7" />
+              </linearGradient>
+              <linearGradient id="galaxy-dark" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#5a189a" />
+                <stop offset="1" stop-color="#10002b" />
+              </linearGradient>
+            </defs>
+          </svg>
+          AFI
+        </a>
+      </div>
+
+      <nav style="margin-top: 30px;">
+        <ul class="nav-links">
+          <li class="active"><a href="#" id="nav-home">
+              <span class="glass-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="url(#galaxy-dark)" stroke-width="2">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg></span>
+              Home
+            </a></li>
+          <li><a href="#" id="nav-game">
+              <span class="glass-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="url(#galaxy-dark)" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg></span>
+              Game
+            </a></li>
+          <li><a href="#" id="nav-training">
+              <span class="glass-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="url(#galaxy-dark)" stroke-width="2">
+                  <path
+                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z">
+                  </path>
+                </svg></span>
+              Training
+            </a></li>
+          <li><a href="#" id="nav-community">
+              <span class="glass-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="url(#galaxy-dark)" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg></span>
+              Community
+            </a></li>
+        </ul>
+      </nav>
+
+      <!-- Buttons Section (from image) -->
+      <div class="glass" style="margin-top: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+        <span style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Actions</span>
+        <button id="btn-donation" class="hero-btn" style="width: 100%;">Donation</button>
+        <button id="btn-contact-sidebar" class="glass"
+          style="width: 100%; padding: 12px; color: white; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; border-radius: 12px;">Contact me</button>
+      </div>
+    </aside>
+
+    <!-- Main Content (Center) -->
+    <main class="main-content">
+
+      <section id="view-home">
+        <!-- Hero Banner -->
+        <section class="hero-banner" id="main-hero">
+          <!-- Asset reference to follow user rules -->
+          <img src="assets/img/runner.png" alt="Runner" style="display: none;" onerror="this.style.display='none';">
+
+          <canvas id="hero-canvas"></canvas>
+          <div class="hero-content">
+            <div class="date-effect-container">
+              <div class="date-effect-btn">
+                <a href="#" id="hero-date">Race Day · Apr 27, 2025</a>
+              </div>
+            </div>
+            <h1 class="hero-title">Afi CorPoRaTiOn</h1>
+            <p style="color: var(--text-secondary); margin-bottom: 24px;">"Tidak ada yang lebih sulit di dunia ini daripada mengatakan kebenaran, dan tidak ada yang lebih mudah daripada sanjungan." (Crime and Punishment)</p>
+            <button id="btn-contact-hero" class="hero-btn">CONTACT ME</button>
+          </div>
+
+        </section>
+
+        <!-- Stats Grid -->
+        <section class="grid-cards">
+
+          <!-- Distance Card -->
+          <div class="uiverse-card">
+            <div class="shimmer"></div>
+            <div class="circle-bg circle-large"></div>
+            <div class="circle-bg circle-medium animate-ping"></div>
+
+            <div class="uiverse-padding">
+              <div class="uiverse-flex-center">
+
+                <div class="uiverse-icon-wrapper">
+                  <div class="animate-ping"
+                    style="position: absolute; inset: -4px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1);">
+                  </div>
+                  <div class="glass-icon" style="width: 50px; height: 50px; border-radius: 50%;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path
+                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                      </path>
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="uiverse-value animate-pulse">21.34 <span
+                    style="font-size: 14px; color: var(--text-secondary);">KM</span></div>
+                <div class="uiverse-label">Distance</div>
+                <div class="stat-trend trend-up">▲ 12% vs last week</div>
+
+                <div class="uiverse-line"
+                  style="background: linear-gradient(to right, transparent, var(--accent-cyan), transparent);"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Time Card -->
+          <div class="uiverse-card">
+            <div class="shimmer"></div>
+            <div class="circle-bg circle-large"></div>
+            <div class="circle-bg animate-pulse" style="width: 40px; height: 40px; top: 20px; right: 20px;"></div>
+
+            <div class="uiverse-padding">
+              <div class="uiverse-flex-center">
+
+                <div class="uiverse-icon-wrapper">
+                  <div class="animate-pulse"
+                    style="position: absolute; inset: -4px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1);">
+                  </div>
+                  <div class="glass-icon" style="width: 50px; height: 50px; border-radius: 50%;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                  </div>
+                </div>
+
+                <div id="current-time-val" class="uiverse-value">00:00:00</div>
+                <div class="uiverse-label">Time</div>
+                <div id="current-date-val" style="font-size: 12px; color: #00c6ff;">Loading...</div>
+
+                <div class="uiverse-line"
+                  style="background: linear-gradient(to right, transparent, var(--accent-purple), transparent);"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Calories Card -->
+          <div class="uiverse-card">
+            <div class="shimmer"></div>
+            <div class="circle-bg circle-large"></div>
+            <div class="circle-bg animate-bounce" style="width: 30px; height: 30px; top: 10px; left: 50%;"></div>
+
+            <div class="uiverse-padding">
+              <div class="uiverse-flex-center">
+
+                <div class="uiverse-icon-wrapper">
+                  <div class="animate-ping"
+                    style="position: absolute; inset: -4px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1);">
+                  </div>
+                  <div class="glass-icon" style="width: 50px; height: 50px; border-radius: 50%;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
+                      </path>
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="uiverse-value">1,248 <span style="font-size: 14px; color: var(--text-secondary);">KCAL</span>
+                </div>
+                <div class="uiverse-label">Calories</div>
+                <div class="stat-trend trend-down">▼ 5% vs target</div>
+
+                <div class="uiverse-line"
+                  style="background: linear-gradient(to right, transparent, var(--accent-pink), transparent);"></div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+      </section>
+
+      <!-- Game View -->
+      <section id="view-game" style="display: none;">
+        <div class="hero-banner" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.6), rgba(59, 130, 246, 0.6));">
+          <div class="hero-content">
+            <div class="date-effect-container">
+              <div class="date-effect-btn">
+                <a href="#">Gaming Hub</a>
+              </div>
+            </div>
+            <h1 class="hero-title">Level Up Your Experience</h1>
+            <p style="color: var(--text-secondary); margin-bottom: 24px;">Temukan game anime terbaik dan lacak progres Anda.</p>
+            <button class="hero-btn">JELAJAHI</button>
+          </div>
+        </div>
+
+        <section class="grid-cards" style="margin-top: 24px;">
+          <div class="uiverse-card">
+            <div class="shimmer"></div>
+            <div class="uiverse-padding">
+              <div class="uiverse-flex-center">
+                <div class="glass-icon" style="width: 60px; height: 60px; border-radius: 12px; margin-bottom: 16px;">🎮</div>
+                <div class="uiverse-value" style="font-size: 20px;">Genshin Impact</div>
+                <div class="uiverse-label">Adventure RPG</div>
+                <div class="stat-trend trend-up">Aktif</div>
+              </div>
+            </div>
+          </div>
+          <div class="uiverse-card">
+            <div class="shimmer"></div>
+            <div class="uiverse-padding">
+              <div class="uiverse-flex-center">
+                <div class="glass-icon" style="width: 60px; height: 60px; border-radius: 12px; margin-bottom: 16px;">⚔️</div>
+                <div class="uiverse-value" style="font-size: 20px;">Honkai: Star Rail</div>
+                <div class="uiverse-label">Turn-Based RPG</div>
+                <div class="stat-trend trend-up">Aktif</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- Training View -->
+      <section id="view-training" style="display: none;">
+        <div class="hero-banner" style="background: linear-gradient(135deg, rgba(244, 63, 94, 0.6), rgba(245, 158, 11, 0.6));">
+          <div class="hero-content">
+            <div class="date-effect-container">
+              <div class="date-effect-btn">
+                <a href="#">Training Area</a>
+              </div>
+            </div>
+            <h1 class="hero-title">Push Your Limits</h1>
+            <p style="color: var(--text-secondary); margin-bottom: 24px;">Latihan terstruktur untuk mencapai performa maksimal.</p>
+            <button class="hero-btn">MULAI LATIHAN</button>
+          </div>
+        </div>
+
+        <div class="glass-card white-glass" style="margin-top: 24px;">
+          <h3 style="margin-bottom: 16px;">Jadwal Latihan</h3>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <div class="glass" style="padding: 12px; border-radius: 10px; flex: 1; text-align: center;">
+              <div style="font-weight: 700;">Senin</div>
+              <div style="font-size: 12px; color: var(--text-secondary);">Kardio</div>
+            </div>
+            <div class="glass" style="padding: 12px; border-radius: 10px; flex: 1; text-align: center;">
+              <div style="font-weight: 700;">Rabu</div>
+              <div style="font-size: 12px; color: var(--text-secondary);">Kekuatan</div>
+            </div>
+            <div class="glass" style="padding: 12px; border-radius: 10px; flex: 1; text-align: center;">
+              <div style="font-weight: 700;">Jumat</div>
+              <div style="font-size: 12px; color: var(--text-secondary);">Fleksibilitas</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Community View -->
+      <section id="view-community" style="display: none;">
+        <div class="hero-banner" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.6), rgba(5, 150, 105, 0.6));">
+          <div class="hero-content">
+            <div class="date-effect-container">
+              <div class="date-effect-btn">
+                <a href="#">Community</a>
+              </div>
+            </div>
+            <h1 class="hero-title">Connect With Others</h1>
+            <p style="color: var(--text-secondary); margin-bottom: 24px;">Berbagi pengalaman dan bertumbuh bersama.</p>
+            <button class="hero-btn">GABUNG DISCORD</button>
+          </div>
+        </div>
+
+        <div class="glass-card" style="margin-top: 24px; display: flex; flex-direction: column; gap: 16px;">
+          <div class="glass" style="padding: 16px; border-radius: 12px;">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+              <div class="glass-icon" style="width: 40px; height: 40px; border-radius: 50%;">👤</div>
+              <div>
+                <div style="font-weight: 700;">User 1</div>
+                <div style="font-size: 11px; color: var(--text-secondary);">2 jam yang lalu</div>
+              </div>
+            </div>
+            <p style="font-size: 14px; color: var(--text-secondary);">Wah, UI dashboard ini keren banget! Efek glassmorphism-nya juara.</p>
+          </div>
+        </div>
+      </section>
+
+
+
+    </main>
+
+    <!-- Right Panel -->
+    <aside class="right-panel">
+
+      <!-- Music Player -->
+      <div class="main-music-card">
+        <input type="checkbox" id="play-toggle" hidden="" checked />
+        <audio id="bg-music" src="assets/music/ice - super slowed.mp3" preload="auto" autoplay></audio>
+
+        <div class="track-info">
+          <div class="album-art">
+            <img src="assets/img/logo-music.jpg" alt="Music Logo"
+              style="width: 100%; height: 100%; border-radius: inherit; object-fit: cover;">
+          </div>
+          <div class="track-details">
+            <div class="track-title">ice - super slowed</div>
+            <div class="artist-name">Echo</div>
+          </div>
+          <div class="volume-bars">
+            <div class="bar" style="--delay:0s"></div>
+            <div class="bar" style="--delay:0.1s"></div>
+            <div class="bar" style="--delay:0.2s"></div>
+            <div class="bar" style="--delay:0.3s"></div>
+            <div class="bar" style="--delay:0.4s"></div>
+            <div class="bar" style="--delay:0.5s"></div>
+            <div class="bar" style="--delay:0.6s"></div>
+            <div class="bar" style="--delay:0.7s"></div>
+          </div>
+        </div>
+
+        <div class="playback-controls">
+          <div class="time-info">
+            <span class="current-time"></span>
+            <span class="remaining-time"></span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
+            <div class="progress-handle"></div>
+          </div>
+          <div class="button-row">
+            <div class="main-control-btns">
+              <button class="control-button back" title="Previous Track" aria-label="Previous Track">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                  class="bi bi-skip-backward-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M.5 3.5A.5.5 0 0 0 0 4v8a.5.5 0 0 0 1 0V8.753l6.267 3.636c.54.313 1.233-.066 1.233-.697v-2.94l6.267 3.636c.54.314 1.233-.065 1.233-.696V4.308c0-.63-.693-1.01-1.233-.696L8.5 7.248v-2.94c0-.63-.692-1.01-1.233-.696L1 7.248V4a.5.5 0 0 0-.5-.5">
+                  </path>
+                </svg>
+              </button>
+              <div class="play-pause-btns">
+                <label for="play-toggle" class="control-button play-pause-button">
+                  <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                    viewBox="0 0 16 16">
+                    <path
+                      d="M11.596 8.697l-6.363 3.692c-.54.314-1.233-.065-1.233-.696V4.308c0-.63.693-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393">
+                    </path>
+                  </svg>
+                  <svg class="icon-pause" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                    viewBox="0 0 16 16">
+                    <path
+                      d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5">
+                    </path>
+                  </svg>
+                </label>
+              </div>
+              <button class="control-button next" title="Next Track" aria-label="Next Track">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                  class="bi bi-skip-forward-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.753l-6.267 3.636c-.54.313-1.233-.066-1.233-.697v-2.94l-6.267 3.636C.693 12.703 0 12.324 0 11.693V4.308c0-.63.693-1.01 1.233-.696L7.5 7.248v-2.94c0-.63.693-1.01 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5">
+                  </path>
+                </svg>
+              </button>
+            </div>
+            <button class="control-button d" title="Radar" aria-label="Radar">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-radar"
+                viewBox="0 0 16 16">
+                <path
+                  d="M6.634 1.135A7 7 0 0 1 15 8a.5.5 0 0 1-1 0 6 6 0 1 0-6.5 5.98v-1.005A5 5 0 1 1 13 8a.5.5 0 0 1-1 0 4 4 0 1 0-4.5 3.969v-1.011A2.999 2.999 0 1 1 11 8a.5.5 0 0 1-1 0 2 2 0 1 0-2.5 1.936v-1.07a1 1 0 1 1 1 0V15.5a.5.5 0 0 1-1 0v-.518a7 7 0 0 1-.866-13.847">
+                </path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Energy / Battery -->
+      <div class="glass-card white-glass">
+        <h3 style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;">Computer Energy</h3>
+        <div style="position: relative; width: 150px; height: 150px; margin: 0 auto;">
+          <svg width="150" height="150" viewBox="0 0 150 150">
+            <circle cx="75" cy="75" r="60" stroke="rgba(255,255,255,0.05)" stroke-width="12" fill="none" />
+            <circle id="battery-circle" cx="75" cy="75" r="60" stroke="url(#progress-grad)" stroke-width="12" fill="none"
+              stroke-dasharray="377" stroke-dashoffset="377" stroke-linecap="round" transform="rotate(-90 75 75)" />
+            <defs>
+              <linearGradient id="progress-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00f3ff" />
+                <stop offset="100%" stop-color="#a855f7" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+            <span id="battery-level" style="font-size: 28px; font-weight: 800;">--%</span>
+            <span id="battery-status" style="display: block; font-size: 11px; color: var(--text-secondary);">Loading...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme Toggle -->
+      <div class="glass-card white-glass" style="text-align: center;">
+        <div class="glass-icon"
+          style="width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center;">
+          <svg id="theme-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)"
+            stroke-width="2">
+            <!-- Default Moon Icon (Dark Mode) -->
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </div>
+        <h4 style="margin-bottom: 4px;" id="theme-text">Dark Mode</h4>
+        <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 12px;">Switch website theme</p>
+        <button id="theme-toggle-btn" class="glass"
+          style="padding: 8px 16px; color: var(--text-primary); border: 1px solid rgba(255,255,255,0.1); cursor: pointer; border-radius: 8px; font-size: 12px; width: 100%;">Switch
+          Theme</button>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
